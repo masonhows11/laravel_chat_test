@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+   {{-- <div class="py-12">
         <div class="">
             <div class="bg-white overflow-hidden ">
                 <div class="p-6 ">
@@ -13,5 +13,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
 </x-app-layout>
