@@ -15,11 +15,12 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="vh-100">
-        <div class="container d-flex justify-items-center justify-content-center">
+        <div class="h-100 container d-flex justify-content-center align-items-center ">
 
             <div class="col-md-6 ">
                 {{ $slot }}
             </div>
+
         </div>
 
     </body>
