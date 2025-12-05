@@ -31,27 +31,27 @@
                         <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Chat Room</a>
+                        <a class="nav-link" href="{{ route('login') }}">ChatRoom</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                        <a class="nav-link" href="{{ route('logout') }}">logout</a>
                     </li>
                 @endauth
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        <a class="nav-link" href="{{ route('login') }}">login</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{  route('register') }}">Register</a>
+                        <a class="nav-link" href="{{  route('register') }}">register</a>
                     </li>
                 @endguest
 
             </ul>
-            <form class="d-flex" role="search">
+           {{-- <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                 <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            </form>--}}
         </div>
     </div>
 </nav>
