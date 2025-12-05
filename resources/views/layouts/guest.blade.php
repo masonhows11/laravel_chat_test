@@ -14,17 +14,18 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="">
-        <div class="">
-            {{--<div>
-                <a href="/" wire:navigate>
-                    <x-application-logo class="" />
-                </a>
-            </div>--}}
+    <body class="vh-100">
+        <div class="container d-flex justify-items-center justify-content-center">
 
-            <div class="">
+            <div class="col-md-6 ">
                 {{ $slot }}
             </div>
         </div>
+
     </body>
 </html>
+{{--<div>
+     <a href="/" wire:navigate>
+     <x-application-logo class="" />
+     </a>
+</div>--}}
