@@ -6,4 +6,5 @@ import jQuery from 'jquery';
 window.$ = jQuery;
 
 import 'bootstrap';
+import './dashboard.js';
 import '../css/app.css';
