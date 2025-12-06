@@ -11,7 +11,7 @@ let typing = true
 let typingTimers = {}
 let isTyping = document.getElementById('isTyping');
 let onlineUsers = document.getElementById('onlineUsers');
-let usersObject = [];
+
 let onlineUsersItems = '';
 
 //
@@ -23,10 +23,10 @@ function clearOnlineUserList() {
 
 // first create the object form user / users
 // then make element li from abject list
-function updateUsers(users) {
+function updateUsers(usersObject) {
     clearOnlineUserList();
-    for (let i = 0; i < usersObject[0].length; i++) {
-        onlineUsersItems += '<li  class="list-group-item">' + usersObject[0][i]['name'] + '</li>';
+    for (let i = 0; i < usersObject.length; i++) {
+        onlineUsersItems += '<li  class="list-group-item">' + usersObject[i]['name'] + '</li>';
     }
     onlineUsers.innerHTML += onlineUsersItems;
 }
@@ -36,15 +36,22 @@ function updateUsers(users) {
 // send from specific user/users
 chatChannel.here(users => {
 
-    usersObject.push(users)
+    let usersObject = [];
+    users.forEach(user => {
+        const obj = {
+            name: user.name,
+        }
+        usersObject.push(obj)
+    })
     updateUsers(usersObject);
 
-
 }).joining(user => {
-    // console.log('join')
-    // console.log(user)
+    console.log('join')
+    console.log(user)
+
     //usersObject.push(user)
     //updateUsers(usersObject);
+
 }).leaving(user => {
     // updateUsers(user);
 }).listenForWhisper('typing', (e) => {
