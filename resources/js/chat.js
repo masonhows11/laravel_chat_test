@@ -11,17 +11,22 @@ let typing = true
 let typingTimers = {}
 let isTyping = document.getElementById('isTyping');
 let onlineUsers = document.getElementById('onlineUsers');
+let usersObject = [];
 let onlineUsersItems = '';
 
-function clearOnlineUserList(){
-    while(onlineUsers.hasChildNodes()){
+//
+function clearOnlineUserList() {
+    while (onlineUsers.hasChildNodes()) {
         onlineUsers.removeChild(onlineUsers.firstChild);
     }
 }
+
+// first create the object form user / users
+// then make element li from abject list
 function updateUsers(users) {
     clearOnlineUserList();
-    for (let i = 0; i < users.length; i++) {
-      onlineUsersItems += '<li  class="list-group-item">' + users[i].name + '</li>';
+    for (let i = 0; i < usersObject[0].length; i++) {
+        onlineUsersItems += '<li  class="list-group-item">' + usersObject[0][i]['name'] + '</li>';
     }
     onlineUsers.innerHTML += onlineUsersItems;
 }
@@ -30,11 +35,18 @@ function updateUsers(users) {
 // other user/users listen for whisper that
 // send from specific user/users
 chatChannel.here(users => {
-    updateUsers(users);
+
+    usersObject.push(users)
+    updateUsers(usersObject);
+
+
 }).joining(user => {
-    updateUsers(user);
+    // console.log('join')
+    // console.log(user)
+    //usersObject.push(user)
+    //updateUsers(usersObject);
 }).leaving(user => {
-    updateUsers(user);
+    // updateUsers(user);
 }).listenForWhisper('typing', (e) => {
 
     // this other_name is my name when I'm typing something
