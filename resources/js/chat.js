@@ -14,21 +14,20 @@ let onlineUsers = document.getElementById('onlineUsers');
 let usersObject = [];
 let onlineUsersItems = '';
 
-//
-function clearOnlineUserList() {
-    while (onlineUsers.hasChildNodes()) {
-        onlineUsers.removeChild(onlineUsers.firstChild);
-    }
-}
 
-// first create the object form user / users
-// then make element li from abject list
-function updateUsers(usersObject) {
-    clearOnlineUserList();
+let clearMessage = document.getElementById('clearMessage');
+const inputMessage = document.getElementById('inputMessage');
+clearMessage.addEventListener('click', (event) => {
+    event.preventDefault();
+    inputMessage.value = '';
+})
+
+function updateUsers() {
+    onlineUsersItems = '';
     for (let i = 0; i < usersObject.length; i++) {
         onlineUsersItems += '<li  class="list-group-item">' + usersObject[i]['name'] + '</li>';
     }
-    onlineUsers.innerHTML += onlineUsersItems;
+    onlineUsers.innerHTML = onlineUsersItems;
 }
 
 // listen for response user typing
@@ -43,23 +42,22 @@ chatChannel.here(users => {
         }
         usersObject.push(obj)
     })
-    updateUsers(usersObject);
+    updateUsers();
 
 }).joining(user => {
-    console.log('join')
-    console.log(user.name)
+
     const obj = {
         id: user.id,
         name: user.name,
     }
-    console.log(obj)
-    console.log(usersObject)
     usersObject.push(obj)
-    updateUsers(usersObject);
+    updateUsers();
 
+}).leaving( (user) => {
 
-}).leaving(user => {
-    // updateUsers(user);
+    usersObject = usersObject.filter(u => u.id !== user.id);
+    updateUsers();
+
 }).listenForWhisper('typing', (e) => {
 
     // this other_name is my name when I'm typing something
