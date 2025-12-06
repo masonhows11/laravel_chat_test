@@ -4,6 +4,7 @@
 @endsection
 
 @section('main')
+    <input type="hidden" id="room" value="{{ $roomId }}">
     <div class="container">
         <div class="row">
 
