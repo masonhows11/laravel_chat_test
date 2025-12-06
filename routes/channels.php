@@ -24,7 +24,7 @@ Broadcast::channel('chat.{roomId}', function ($user, $roomId) {
      // info on user mesle name email mobile ya harchize digei
      if($user->rooms()->where('rooms.id', $roomId)->exists())
      {
-         return ['name' => $user->name];
+         return ['name' => $user->name , 'id' => $user->id];
      };
 
 });

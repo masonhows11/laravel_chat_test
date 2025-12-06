@@ -11,7 +11,7 @@ let typing = true
 let typingTimers = {}
 let isTyping = document.getElementById('isTyping');
 let onlineUsers = document.getElementById('onlineUsers');
-
+let usersObject = [];
 let onlineUsersItems = '';
 
 //
@@ -36,9 +36,9 @@ function updateUsers(usersObject) {
 // send from specific user/users
 chatChannel.here(users => {
 
-    let usersObject = [];
     users.forEach(user => {
         const obj = {
+            id: user.id,
             name: user.name,
         }
         usersObject.push(obj)
@@ -47,10 +47,16 @@ chatChannel.here(users => {
 
 }).joining(user => {
     console.log('join')
-    console.log(user)
+    console.log(user.name)
+    const obj = {
+        id: user.id,
+        name: user.name,
+    }
+    console.log(obj)
+    console.log(usersObject)
+    usersObject.push(obj)
+    updateUsers(usersObject);
 
-    //usersObject.push(user)
-    //updateUsers(usersObject);
 
 }).leaving(user => {
     // updateUsers(user);
