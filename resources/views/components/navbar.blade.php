@@ -12,7 +12,7 @@
                 </li>
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                        <a class="nav-link" href="{{ route('dashboard') }}">Dashboard - {{ auth()->user()->name  }} </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('chat.room') }}">ChatRoom</a>

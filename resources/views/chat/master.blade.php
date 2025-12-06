@@ -15,8 +15,12 @@
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('styles')
+    <script>
+        window.current_user_name = @json( auth()->user()->name )
+    </script>
 </head>
 <body class="">
+<input type="hidden" value="{{ auth()->id()  }}">
 <x-navbar/>
 @yield('main')
 @yield('scripts')
