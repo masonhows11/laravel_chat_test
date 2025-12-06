@@ -1,6 +1,12 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ route('home') }}">Laravel Chat</a>
+
+        @auth
+            <a class="navbar-brand" href="{{ route('home') }}">Laravel Chat - {{ auth()->user()->name  }}</a>
+        @else
+            <a class="navbar-brand" href="{{ route('home') }}">Laravel Chat</a>
+        @endauth
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle"
                 aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
