@@ -3,27 +3,38 @@ let roomId = document.getElementById("room").value;
 
 //// private channel
 // let chatChannel = window.Echo.private(`chat.${roomId}`);
-
 //// this project for presence channel
 let chatChannel = window.Echo.join(`chat.${roomId}`);
-
-
+//
 let current_name = window.current_user_name;
 let typing = true
 let typingTimers = {}
 let isTyping = document.getElementById('isTyping');
-//// listen for response user typing
+let onlineUsers = document.getElementById('onlineUsers');
+let onlineUsersItems = '';
 
-//// other user/user listen for whisper send from specific user/users
-chatChannel.here( users =>{
-    console.log('here')
-    console.log(users)
+function clearOnlineUserList(){
+    while(onlineUsers.hasChildNodes()){
+        onlineUsers.removeChild(onlineUsers.firstChild);
+    }
+}
+function updateUsers(users) {
+    clearOnlineUserList();
+    for (let i = 0; i < users.length; i++) {
+      onlineUsersItems += '<li  class="list-group-item">' + users[i].name + '</li>';
+    }
+    onlineUsers.innerHTML += onlineUsersItems;
+}
+
+// listen for response user typing
+// other user/users listen for whisper that
+// send from specific user/users
+chatChannel.here(users => {
+    updateUsers(users);
 }).joining(user => {
-    console.log('join user')
-    console.log(user)
+    updateUsers(user);
 }).leaving(user => {
-    console.log('leave user')
-    console.log(user)
+    updateUsers(user);
 }).listenForWhisper('typing', (e) => {
 
     // this other_name is my name when I'm typing something
