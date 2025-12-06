@@ -7,13 +7,24 @@ use Illuminate\Support\Facades\Broadcast;
 //});
 
 Broadcast::channel('tasks.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+    return (int)$user->id === (int)$id;
 });
 
 // parameter name in wildcard channel name
 // & parameter name in function must be same
 // otherwise error
-Broadcast::channel('chat.{roomId}',function($user,$roomId){
-    return $user && $user->rooms()->where('rooms.id',$roomId)->exists();
-    // return $user->rooms->contains($user->id,$roomId);
+// Broadcast::channel('chat.{roomId}',function($user,$roomId){
+//    return $user && $user->rooms()->where('rooms.id',$roomId)->exists();
+// });
+
+
+// for presence channel
+Broadcast::channel('chat.{roomId}', function ($user, $roomId) {
+     // mige agar usery in shomareh room ro dashte bashe info on user ro bargardun
+     // info on user mesle name email mobile ya harchize digei
+     if($user->rooms()->where('rooms.id', $roomId)->exists())
+     {
+         return ['name' => $user->name];
+     };
+
 });

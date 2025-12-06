@@ -20,7 +20,7 @@
                         </form>
                     </div>
                     <div class="col-md-4">
-                        <h3 class="text-center ">Current users</h3>
+                        <h3 class="text-center ">Online users</h3>
                         <div class="border border-3 rounded rounded-2 mt-4 h-75 overflow-y-scroll">
                             <ul class="list-group ">
                                 <li class="list-group-item">An item</li>

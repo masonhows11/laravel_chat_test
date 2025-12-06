@@ -1,6 +1,13 @@
 // whisper means other user listen to one channel and sea typing event
 let roomId = document.getElementById("room").value;
-let chatChannel = window.Echo.private(`chat.${roomId}`);
+
+//// private channel
+// let chatChannel = window.Echo.private(`chat.${roomId}`);
+
+//// this project for presence channel
+let chatChannel = window.Echo.join(`chat.${roomId}`);
+
+
 let current_name = window.current_user_name;
 let typing = true
 let typingTimers = {}
@@ -8,7 +15,16 @@ let isTyping = document.getElementById('isTyping');
 //// listen for response user typing
 
 //// other user/user listen for whisper send from specific user/users
-chatChannel.listenForWhisper('typing', (e) => {
+chatChannel.here( users =>{
+    console.log('here')
+    console.log(users)
+}).joining(user => {
+    console.log('join user')
+    console.log(user)
+}).leaving(user => {
+    console.log('leave user')
+    console.log(user)
+}).listenForWhisper('typing', (e) => {
 
     // this other_name is my name when I'm typing something
     // then display to others like naeem is typing
