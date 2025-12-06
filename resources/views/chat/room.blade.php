@@ -14,11 +14,12 @@
                         <form>
                             <div class="mb-3">
                                 <label for="message" class="form-label">message</label>
-                                <input type="text" class="form-control" id="message" placeholder="type something">
+                                <input type="text" class="form-control" onclick="typingWhisper(event)" id="message" placeholder="type something">
+                                <span id="isTyping"></span>
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <h3 class="text-center ">Current users</h3>
                         <div class="border border-3 rounded rounded-2 mt-4 h-75 overflow-y-scroll">
                             <ul class="list-group ">
