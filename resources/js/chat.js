@@ -15,16 +15,16 @@ const token = document.querySelector('meta[name="csrf-token"]').getAttribute('co
 if(token){
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
 }
+//
 let chatChannel = window.Echo.join(`chat.${roomId}`);
 //
-let current_name = window.current_user_name;
+let current_name = window.current_user.name;
+let current_id = window.current_user.id;
 let typingTimers = {}
 let isTyping = document.getElementById('isTyping');
 let onlineUsers = document.getElementById('onlineUsers');
 let usersObject = [];
 let onlineUsersItems = '';
-
-
 let clearMessage = document.getElementById('clearMessage');
 const inputMessage = document.getElementById('inputMessage');
 clearMessage.addEventListener('click', (event) => {
@@ -71,9 +71,15 @@ chatChannel.here(users => {
 }).listenForWhisper('typing', (e) => {
 
     // this other_name is my name when I'm typing something
-    // then display to others like naeem is typing
+    // then display to others like
+    // naeem is typing or mamad is typing or sara is typing
     let other_name = e.user_name;
+    isTypingHandle(other_name);
 
+
+})
+
+function isTypingHandle(other_name) {
     // first step
     isTyping.innerHTML = `${other_name} is typing... `;
     // second step
@@ -85,8 +91,7 @@ chatChannel.here(users => {
         isTyping.innerHTML = '';
         delete typingTimers[other_name]
     }, 2000);
-
-})
+}
 
 //// listen for user typing
 window.typingWhisper = function (event) {
@@ -97,6 +102,19 @@ window.typingWhisper = function (event) {
     })
 }
 
+function sendMessage(data) {
+
+    axios.post('/store/message',{
+        user_id : current_id,
+        roomId : roomId,
+        message : inputMessage
+    }).then(function (response){
+        console.log(response)
+    }).catch(function (error) {
+        console.log(error);
+    })
+}
+
 // function testLoad() {
 //     axios.get('/get/tasks').then(function (res) {
 //         console.log(res.data)
@@ -104,5 +122,4 @@ window.typingWhisper = function (event) {
 //         console.log(error)
 //     }).finally()
 // }
-//
 // testLoad()

@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Message;
 use App\Models\User;
 //use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\Channel;
@@ -17,13 +18,15 @@ class MessageSentEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     private $user;
+    private $message;
     /**
      * Create a new event instance.
      */
-    public function __construct(User $user)
+    public function __construct(Message $message ,User $user)
     {
         //
         $this->user = $user;
+        $this->message = $message;
     }
 
     /**
@@ -37,7 +40,7 @@ class MessageSentEvent implements ShouldBroadcast
             // new PrivateChannel('channel-name'),
 
             //new PrivateChannel('chat.' . $this->user->id),
-            new PresenceChannel('chat.' . $this->user->id),
+            new PresenceChannel('chat.' . $this->message->room_id),
         ];
     }
 }

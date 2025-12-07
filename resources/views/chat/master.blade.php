@@ -16,7 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('styles')
     <script>
-        window.current_user_name = @json( auth()->user()->name )
+        window.current_user = @json( auth()->user() )
     </script>
 </head>
 <body class="">
