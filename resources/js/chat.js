@@ -1,7 +1,6 @@
 import axios from 'axios';
+
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-
 
 
 //// private channel
@@ -12,7 +11,7 @@ let roomId = document.getElementById("room").value;
 // get csrf-token
 const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 // set csrf-token in axios header
-if(token){
+if (token) {
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
 }
 //
@@ -26,7 +25,8 @@ let onlineUsers = document.getElementById('onlineUsers');
 let usersObject = [];
 let onlineUsersItems = '';
 let clearMessage = document.getElementById('clearMessage');
-const inputMessage = document.getElementById('inputMessage');
+let inputMessage = document.getElementById('inputMessage');
+let sendMessageBtn = document.getElementById('sendMessage');
 clearMessage.addEventListener('click', (event) => {
     event.preventDefault();
     inputMessage.value = '';
@@ -63,7 +63,7 @@ chatChannel.here(users => {
     usersObject.push(obj)
     updateUsers();
 
-}).leaving( (user) => {
+}).leaving((user) => {
 
     usersObject = usersObject.filter(u => u.id !== user.id);
     updateUsers();
@@ -102,18 +102,21 @@ window.typingWhisper = function (event) {
     })
 }
 
-function sendMessage(data) {
 
-    axios.post('/store/message',{
-        user_id : current_id,
-        roomId : roomId,
-        message : inputMessage
-    }).then(function (response){
+sendMessageBtn.addEventListener('click', (event) => {
+
+    axios.post('/store/message', {
+        user_id: current_id,
+        roomId: roomId,
+        message: inputMessage
+    }).then(function (response) {
         console.log(response)
     }).catch(function (error) {
         console.log(error);
     })
-}
+    inputMessage.innerHTML = '';
+
+})
 
 // function testLoad() {
 //     axios.get('/get/tasks').then(function (res) {
