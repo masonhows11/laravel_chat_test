@@ -11,6 +11,8 @@ Route::group(['middleware' => ['web','auth']], function () {
 
     Route::get('/chatroom', [ChatController::class,'index'])->name('chat.room');
 
+    Route::get('/get/tasks', [ChatController::class,'getTasks'])->name('get.tasks');
+
 });
 
 Route::view('dashboard', 'dashboard')

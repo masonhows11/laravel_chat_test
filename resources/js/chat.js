@@ -1,3 +1,6 @@
+import axios from 'axios';
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 // whisper means other user listen to one channel and sea typing event
 let roomId = document.getElementById("room").value;
 
@@ -63,7 +66,7 @@ chatChannel.here(users => {
     // this other_name is my name when I'm typing something
     // then display to others like naeem is typing
     let other_name = e.user_name;
-    
+
     // first step
     isTyping.innerHTML = `${other_name} is typing... `;
     // second step
@@ -86,3 +89,13 @@ window.typingWhisper = function (event) {
         user_name: current_name,
     })
 }
+
+// function testLoad() {
+//     axios.get('/get/tasks').then(function (res) {
+//         console.log(res.data)
+//     }).catch(function (error) {
+//         console.log(error)
+//     }).finally()
+// }
+//
+// testLoad()

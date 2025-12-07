@@ -6,6 +6,7 @@
         "dev": "vite"
     },
     "dependencies": {
+        "@bundled-es-modules/axios": "^0.27.2",
         "@fortawesome/fontawesome-free": "^7.1.0",
         "@tailwindcss/vite": "^4.1.11",
         "axios": "^1.13.2",

@@ -2,7 +2,10 @@
 // Posted by Kim Hallberg, modified by community. See post 'Timeline' for change history
 // Retrieved 2025-12-05, License - CC BY-SA 4.0
 
-import axios from 'axios'
+// import axios from 'axios'
+// window.axios = axios
+// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+// window.axios.defaults.withCredentials = true
 import jQuery from 'jquery';
 window.$ = jQuery;
 
