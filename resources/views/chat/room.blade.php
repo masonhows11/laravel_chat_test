@@ -18,15 +18,14 @@
                             <div class="mb-3">
                                 <label for="message" class="mt-2 form-label fw-medium">Message</label>
                                 <div class="d-flex flex-column">
-                                    <input type="text" class="form-control"
-                                           onclick="typingWhisper(event)"
-                                           id="inputMessage"
-                                           placeholder="type something">
-                                    <button class="ms-1 btn  btn-secondary w-25  py-1 my-1" id="clearMessage">clear</button>
+                                    <input type="text" class="form-control" onclick="typingWhisper(event)"
+                                        id="inputMessage" placeholder="type something">
                                 </div>
-
-
-                                <span id="isTyping"></span>
+                                <span id="isTyping" style="height: 50px"></span>
+                            </div>
+                            <div>
+                                <button class="ms-1 btn  btn-success w-25  py-1 my-1" id="sendMessage">Send</button>
+                                <button class="ms-1 btn  btn-secondary w-25  py-1 my-1" id="clearMessage">Clear</button>
                             </div>
                         </form>
                     </div>

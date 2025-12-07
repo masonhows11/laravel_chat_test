@@ -2,6 +2,7 @@
 // Posted by Kim Hallberg, modified by community. See post 'Timeline' for change history
 // Retrieved 2025-12-05, License - CC BY-SA 4.0
 
+import axios from 'axios'
 import jQuery from 'jquery';
 window.$ = jQuery;
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
-use App\Models\Room;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -23,5 +23,12 @@ class ChatController extends Controller
             'message' => $request->message,
         ]);
 
+    }
+
+    public function getTasks(){
+
+        return response()->json([
+            'tasks' => Task::all()
+        ],200);
     }
 }
