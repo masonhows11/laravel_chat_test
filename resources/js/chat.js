@@ -1,16 +1,23 @@
 import axios from 'axios';
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-// whisper means other user listen to one channel and sea typing event
-let roomId = document.getElementById("room").value;
+
+
 
 //// private channel
 // let chatChannel = window.Echo.private(`chat.${roomId}`);
+
 //// this project for presence channel
+let roomId = document.getElementById("room").value;
+// get csrf-token
+const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+// set csrf-token in axios header
+if(token){
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+}
 let chatChannel = window.Echo.join(`chat.${roomId}`);
 //
 let current_name = window.current_user_name;
-let typing = true
 let typingTimers = {}
 let isTyping = document.getElementById('isTyping');
 let onlineUsers = document.getElementById('onlineUsers');
