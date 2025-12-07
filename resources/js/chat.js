@@ -104,7 +104,11 @@ window.typingWhisper = function (event) {
 
 
 sendMessageBtn.addEventListener('click', (event) => {
-
+    event.preventDefault();
+    if(inputMessage.value === '') {
+        document.getElementById('messageError').style.display = 'block';
+        return null
+    }
     axios.post('/store/message', {
         user_id: current_id,
         roomId: roomId,

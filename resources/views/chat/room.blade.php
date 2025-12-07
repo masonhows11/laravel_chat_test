@@ -16,12 +16,21 @@
                         </div>
                         <form>
                             <div class="mb-3">
-                                <label for="message" class="mt-2 form-label fw-medium">Message</label>
+                                <label for="inputMessage" class="mt-2 form-label fw-medium">Message</label>
                                 <div class="d-flex flex-column">
                                     <input type="text" class="form-control" onclick="typingWhisper(event)"
                                         id="inputMessage" placeholder="type something">
                                 </div>
                                 <span id="isTyping" style="height: 50px"></span>
+                                <div id="messageError" class="mt-2" style="display:none">
+                                    <div  class="alert alert-danger d-flex align-items-center" role="alert" >
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                        <div class="ms-2">
+                                            Please enter your message
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div>
                                 <button class="ms-1 btn  btn-success w-25  py-1 my-1" id="sendMessage">Send</button>
