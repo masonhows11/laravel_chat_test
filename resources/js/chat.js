@@ -64,6 +64,7 @@ chatChannel.here(users => {
     // then display to others like naeem is typing
     let other_name = e.user_name;
     // first step
+
     isTyping.innerHTML = `${other_name} is typing... `;
     // second step
     if (typingTimers[other_name]) {

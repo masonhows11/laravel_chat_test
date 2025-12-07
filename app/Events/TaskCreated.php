@@ -48,10 +48,12 @@ class TaskCreated implements ShouldBroadcast
             // new Channel('tasks')
 
             // this is private channel
+
             // new PrivateChannel('tasks.'.$this->user->id),
-            new PresenceChannel('tasks.'.$this->user->id),
-            // new PrivateChannel('chat.'.$this->user->id),
-            new PresenceChannel('chat.' . $this->user->id),
+            // new PresenceChannel('tasks.'.$this->user->id),
+
+            new PrivateChannel('chat.' . $this->user->id),
+            // new PresenceChannel('chat.' . $this->user->id),
         ];
     }
 }
