@@ -122,7 +122,8 @@ sendMessageBtn.addEventListener('click', (event) => {
     inputMessage.value = '';
 })
 
-
-window.Echo.channel(`chat.${roomId}`).listen('MessageSentEvent',(e)=>{
+// to listen other user / users on PresenceChannel
+// use join method instead channel its very important
+window.Echo.join(`chat.${roomId}`).listen('MessageSentEvent',(e)=>{
     console.log(e)
 })

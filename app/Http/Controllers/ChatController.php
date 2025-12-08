@@ -20,14 +20,14 @@ class ChatController extends Controller
     {
         try {
 
-            $newMessage = Message::create([
+            $message = Message::create([
                 'user_id' => auth()->id(),
                 'message' => $request->message,
                 'room_id' => (int)$request->room_id,
             ]);
 
-            $roomId = $newMessage->room_id;
-            event(new MessageSentEvent($roomId,$newMessage,auth()->user()));
+            $roomId = $message->room_id;
+            event(new MessageSentEvent($roomId,$message,auth()->user()));
         } catch (\Exception $exception) {
             return response()->json(['error' => $exception->getMessage()]);
         }

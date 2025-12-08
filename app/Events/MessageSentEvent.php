@@ -31,6 +31,7 @@ class MessageSentEvent implements ShouldBroadcast
         $this->roomId = $roomId;
     }
 
+    // send data with broadcastWith method
     public function broadcastWith(): array
     {
         return ['message' => $this->message->message,
