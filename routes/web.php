@@ -13,7 +13,7 @@ Route::group(['middleware' => ['web','auth']], function () {
 
     Route::get('/get/tasks', [ChatController::class,'getTasks'])->name('get.tasks');
 
-    Route::get('/store/message', [ChatController::class,'store'])->name('store.message');
+    Route::post('/store/message', [ChatController::class,'store'])->name('store.message');
 
 });
 

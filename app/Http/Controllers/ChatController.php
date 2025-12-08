@@ -18,11 +18,14 @@ class ChatController extends Controller
 
     public function store(Request $request)
     {
+
+
         try {
             $newMessage = Message::create([
                 'user_id' => auth()->id(),
-                'room_id' => $request->room_id,
                 'message' => $request->message,
+                'room_id' => (int)$request->room_id,
+
             ]);
             event(new MessageSentEvent($newMessage,auth()->user()));
             return response()->json($newMessage);

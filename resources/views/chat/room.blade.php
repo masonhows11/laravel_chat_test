@@ -4,7 +4,7 @@
 @endsection
 
 @section('main')
-    <input type="hidden" id="room" value="{{ $roomId }}">
+    <input type="hidden" id="roomId" value="{{ $roomId }}">
     <div class="container vh-100">
         <div class="row d-flex align-items-center justify-content-center">
             <div class="col-md-12">
@@ -12,7 +12,6 @@
                     <div class="col-md-8 vh-75 d-flex flex-column ">
                         <h3>Message box</h3>
                         <div class="mt-4 border border-2 rounded rounded-2 mh-100 overflow-y-auto" style="height:480px">
-
                         </div>
                         <form>
                             <div class="mb-3">

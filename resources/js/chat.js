@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
@@ -7,7 +6,7 @@ axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // let chatChannel = window.Echo.private(`chat.${roomId}`);
 
 //// this project for presence channel
-let roomId = document.getElementById("room").value;
+let roomId = document.getElementById("roomId").value;
 // get csrf-token
 const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 // set csrf-token in axios header
@@ -75,6 +74,7 @@ chatChannel.here(users => {
     // naeem is typing or mamad is typing or sara is typing
     let other_name = e.user_name;
     isTypingHandle(other_name);
+    console.log(e)
 
 
 })
@@ -109,16 +109,17 @@ sendMessageBtn.addEventListener('click', (event) => {
         document.getElementById('messageError').style.display = 'block';
         return null
     }
+
     axios.post('/store/message', {
         user_id: current_id,
-        roomId: roomId,
-        message: inputMessage
+        room_id: parseInt(roomId),
+        message: inputMessage.value
     }).then(function (response) {
         console.log(response)
     }).catch(function (error) {
         console.log(error);
     })
-    inputMessage.innerHTML = '';
+    inputMessage.value = '';
 
 })
 
