@@ -17,18 +17,25 @@ class MessageSentEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    private $user;
-    private $message;
+    public $user;
+    public $message;
+    public $roomId;
     /**
      * Create a new event instance.
      */
-    public function __construct(Message $message ,User $user)
+    public function __construct($roomId,Message $message ,User $user)
     {
         //
         $this->user = $user;
         $this->message = $message;
+        $this->roomId = $roomId;
     }
 
+    public function broadcastWith(): array
+    {
+        return ['message' => $this->message->message,
+                'sender' => $this->user->name];
+    }
     /**
      * Get the channels the event should broadcast on.
      *
@@ -38,9 +45,8 @@ class MessageSentEvent implements ShouldBroadcast
     {
         return [
             // new PrivateChannel('channel-name'),
-
             //new PrivateChannel('chat.' . $this->user->id),
-            new PresenceChannel('chat.' . $this->message->room_id),
+            new PresenceChannel('chat.' . $this->roomId),
         ];
     }
 }

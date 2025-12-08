@@ -30,7 +30,7 @@ clearMessage.addEventListener('click', (event) => {
     event.preventDefault();
     inputMessage.value = '';
 })
-
+//// update users online list ////
 function updateUsers() {
     onlineUsersItems = '';
     for (let i = 0; i < usersObject.length; i++) {
@@ -39,7 +39,7 @@ function updateUsers() {
     onlineUsers.innerHTML = onlineUsersItems;
 }
 
-// listen for response user typing
+//// listen for response user typing (call whisper) ////
 // other user/users listen for whisper that
 // send from specific user/users
 chatChannel.here(users => {
@@ -68,17 +68,14 @@ chatChannel.here(users => {
     updateUsers();
 
 }).listenForWhisper('typing', (e) => {
-
     // this other_name is my name when I'm typing something
-    // then display to others like
-    // naeem is typing or mamad is typing or sara is typing
+    // then display to others
+    // like naeem is typing or mamad is typing or sara is typing
     let other_name = e.user_name;
     isTypingHandle(other_name);
-    console.log(e)
-
-
 })
 
+//// handle user typing whisper ////
 function isTypingHandle(other_name) {
     // first step
     isTyping.innerHTML = `${other_name} is typing... `;
@@ -93,9 +90,10 @@ function isTypingHandle(other_name) {
     }, 2000);
 }
 
-//// listen for user typing
+//// listen for user typing ////
 window.typingWhisper = function (event) {
-    // this code send data like name with whisper
+
+    // this code send data like name,id,message,with whisper
     // to other user/users
     chatChannel.whisper("typing", {
         user_name: current_name,
@@ -103,13 +101,15 @@ window.typingWhisper = function (event) {
 }
 
 
+//// method for send message to server for save ////
 sendMessageBtn.addEventListener('click', (event) => {
+    //
     event.preventDefault();
     if(inputMessage.value === '') {
         document.getElementById('messageError').style.display = 'block';
         return null
     }
-
+    //
     axios.post('/store/message', {
         user_id: current_id,
         room_id: parseInt(roomId),
@@ -120,14 +120,9 @@ sendMessageBtn.addEventListener('click', (event) => {
         console.log(error);
     })
     inputMessage.value = '';
-
 })
 
-// function testLoad() {
-//     axios.get('/get/tasks').then(function (res) {
-//         console.log(res.data)
-//     }).catch(function (error) {
-//         console.log(error)
-//     }).finally()
-// }
-// testLoad()
+
+window.Echo.channel(`chat.${roomId}`).listen('MessageSentEvent',(e)=>{
+    console.log(e)
+})
