@@ -44,7 +44,6 @@ function updateUsers() {
 // other user/users listen for whisper that
 // send from specific user/users
 chatChannel.here(users => {
-
     users.forEach(user => {
         const obj = {
             id: user.id,
@@ -53,21 +52,16 @@ chatChannel.here(users => {
         usersObject.push(obj)
     })
     updateUsers();
-
 }).joining(user => {
-
     const obj = {
         id: user.id,
         name: user.name,
     }
     usersObject.push(obj)
     updateUsers();
-
 }).leaving((user) => {
-
     usersObject = usersObject.filter(u => u.id !== user.id);
     updateUsers();
-
 }).listenForWhisper('typing', (e) => {
     // this other_name is my name when I'm typing something
     // then display to others
@@ -93,7 +87,6 @@ function isTypingHandle(other_name) {
 
 //// listen for user typing ////
 window.typingWhisper = function (event) {
-
     // this code send data like name,id,message,with whisper
     // to other user/users
     chatChannel.whisper("typing", {
@@ -104,13 +97,11 @@ window.typingWhisper = function (event) {
 
 //// method for send message to server for save ////
 sendMessageBtn.addEventListener('click', (event) => {
-    //
     event.preventDefault();
     if(inputMessage.value === '') {
         document.getElementById('messageError').style.display = 'block';
         return null
     }
-    //
     axios.post('/store/message', {
         user_id: current_id,
         room_id: parseInt(roomId),
@@ -126,7 +117,6 @@ sendMessageBtn.addEventListener('click', (event) => {
 // to listen other user / users on PresenceChannel
 // use join method instead channel its very important
 window.Echo.join(`chat.${roomId}`).listen('MessageSentEvent',(e)=>{
-
     // update the chat box with incoming messages
-
+    let message = '';
 })
