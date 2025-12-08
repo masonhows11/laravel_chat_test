@@ -122,6 +122,7 @@ window.Echo.join(`chat.${roomId}`).listen('MessageSentEvent',(e)=>{
     let message = e.message;
     let sender = e.sender;
 
+    // need refactor for add remove message btn/icon
     messageElement += '<div class="card my-1"> <div class="card-body">' +
         '<h6 class="card-subtitle mb-2 text-muted">'+sender+'</h6>'
         + message +
