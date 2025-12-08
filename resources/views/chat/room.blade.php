@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-md-8 vh-75 d-flex flex-column ">
                         <h3>Message box</h3>
-                        <div id="boxMessage" class="mt-3 border border-2 rounded rounded-2 mh-100 overflow-y-auto" style="height:480px">
+                        <div id="boxMessage" class="flex  flex-column mt-3 py-2 px-2 border border-2 rounded rounded-2 mh-100 overflow-y-auto" style="height:480px">
                         </div>
                         <form>
                             <div class="mb-3">

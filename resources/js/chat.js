@@ -118,5 +118,15 @@ sendMessageBtn.addEventListener('click', (event) => {
 // use join method instead channel its very important
 window.Echo.join(`chat.${roomId}`).listen('MessageSentEvent',(e)=>{
     // update the chat box with incoming messages
-    let message = '';
+    let messageElement = '';
+    let message = e.message;
+    let sender = e.sender;
+
+    messageElement += '<div class="card my-1"> <div class="card-body">' +
+        '<h6 class="card-subtitle mb-2 text-muted">'+sender+'</h6>'
+        + message +
+        '</div> </div>';
+    boxMessage.innerHTML += messageElement;
+
+
 })
