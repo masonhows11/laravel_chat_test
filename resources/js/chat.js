@@ -26,6 +26,7 @@ let onlineUsersItems = '';
 let clearMessage = document.getElementById('clearMessage');
 let inputMessage = document.getElementById('inputMessage');
 let sendMessageBtn = document.getElementById('sendMessage');
+let boxMessage = document.getElementById('boxMessage');
 clearMessage.addEventListener('click', (event) => {
     event.preventDefault();
     inputMessage.value = '';
@@ -125,5 +126,7 @@ sendMessageBtn.addEventListener('click', (event) => {
 // to listen other user / users on PresenceChannel
 // use join method instead channel its very important
 window.Echo.join(`chat.${roomId}`).listen('MessageSentEvent',(e)=>{
-    console.log(e)
+
+    // update the chat box with incoming messages
+
 })
