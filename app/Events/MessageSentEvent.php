@@ -35,7 +35,8 @@ class MessageSentEvent implements ShouldBroadcast
     public function broadcastWith(): array
     {
         return ['message' => $this->message->message,
-                'sender' => $this->user->name];
+                'sender' => $this->user->name,
+                'id' => $this->message->id];
     }
     /**
      * Get the channels the event should broadcast on.

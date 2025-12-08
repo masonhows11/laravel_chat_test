@@ -82,7 +82,7 @@ function isTypingHandle(other_name) {
     typingTimers[other_name] = setTimeout(() => {
         isTyping.innerHTML = '';
         delete typingTimers[other_name]
-    }, 2000);
+    }, 3000);
 }
 
 //// listen for user typing ////
@@ -127,6 +127,11 @@ window.Echo.join(`chat.${roomId}`).listen('MessageSentEvent',(e)=>{
         + message +
         '</div> </div>';
     boxMessage.innerHTML += messageElement;
+})
 
-
+document.querySelectorAll('.removeMessage').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+        let id = parseInt(btn.getAttribute('data-messageId'))
+        console.log(id);
+    })
 })

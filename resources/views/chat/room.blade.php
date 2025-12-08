@@ -11,18 +11,40 @@
                 <div class="row">
                     <div class="col-md-8 vh-75 d-flex flex-column ">
                         <h3>Message box</h3>
-                        <div id="boxMessage" class="flex  flex-column mt-3 py-2 px-2 border border-2 rounded rounded-2 mh-100 overflow-y-auto" style="height:480px">
+                        <div id="boxMessage"
+                             class="flex  flex-column mt-3 py-2 px-2 border border-2 rounded rounded-2 mh-100 overflow-y-auto"
+                             style="height:480px">
+                            @if(!empty($messages))
+                                @foreach($messages as $message)
+                                    <div class="card my-2">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <span class="card-subtitle text-muted">{{ $message->user->name }}</span>
+                                                </div>
+                                                <div><a id="removeMessage-{{$message->id}}"
+                                                        data-messageId="{{ $message->id }}"
+                                                        href="javascript:void(0)"
+                                                        class="mb-4 removeMessage">
+                                                        <i class="fa-solid fa-trash-alt text-danger"></i></a></div>
+                                            </div>
+                                            {{ $message->message  }}
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+
                         </div>
                         <form>
                             <div class="mb-3">
                                 <label for="inputMessage" class="mt-2 form-label fw-medium">Message</label>
                                 <div class="d-flex flex-column">
                                     <input type="text" class="form-control" onclick="typingWhisper(event)"
-                                        id="inputMessage" placeholder="type something">
+                                           id="inputMessage" placeholder="type something">
                                 </div>
                                 <span id="isTyping" style="height: 50px"></span>
                                 <div id="messageError" class="mt-2" style="display:none">
-                                    <div  class="alert alert-danger d-flex align-items-center" role="alert" >
+                                    <div class="alert alert-danger d-flex align-items-center" role="alert">
                                         <i class="fa-solid fa-triangle-exclamation"></i>
                                         <div class="ms-2">
                                             Please enter your message

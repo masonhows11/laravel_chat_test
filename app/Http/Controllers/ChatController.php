@@ -6,6 +6,7 @@ use App\Events\MessageSentEvent;
 use App\Models\Message;
 use App\Models\Task;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
 {
@@ -13,7 +14,11 @@ class ChatController extends Controller
     public function index()
     {
         $roomId = auth()->user()->rooms()->first()->id;
-        return view('chat.room', ['roomId' => $roomId]);
+        $messages = Message::with('user')
+            ->where('room_id', $roomId)
+            ->orderBy('created_at')
+            ->get();
+        return view('chat.room', ['roomId' => $roomId,'messages' => $messages]);
     }
 
     public function store(Request $request)
@@ -27,7 +32,7 @@ class ChatController extends Controller
             ]);
 
             $roomId = $message->room_id;
-            event(new MessageSentEvent($roomId,$message,auth()->user()));
+            event(new MessageSentEvent($roomId, $message, auth()->user()));
         } catch (\Exception $exception) {
             return response()->json(['error' => $exception->getMessage()]);
         }
