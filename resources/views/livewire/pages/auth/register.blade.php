@@ -41,8 +41,8 @@ new #[Layout('layouts.guest')] class extends Component
     <form wire:submit="register">
         <!-- Name -->
         <div>
-            <label ffor="name"  class="form-label">Name</label>
-            <input twire:model="name" id="name" class="mt-1 form-control" type="text" name="name"  autofocus autocomplete="name">
+            <label for="name"  class="form-label">Name</label>
+            <input wire:model="name" id="name" class="mt-1 form-control" type="text" name="name"  autofocus autocomplete="name">
             @error('name') <span class="is-invalid text-danger">{{ $message }}</span> @enderror
         </div>
 
