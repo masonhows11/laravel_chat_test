@@ -39,6 +39,19 @@ class ChatController extends Controller
         //return response()->json(['success' => true]);
     }
 
+
+    public function delete(Request $request)
+    {
+        try {
+            Message::destroy($request->id);
+            return response()->json(['success' => true]);
+        }catch (\Exception $exception){
+            return response()->json(['error' => $exception->getMessage()]);
+        }
+
+
+    }
+
     public function getTasks()
     {
 
