@@ -44,7 +44,7 @@ class ChatController extends Controller
     {
         try {
             Message::destroy($request->id);
-            return response()->json(['success' => true]);
+            return response()->json(['success' => true],200);
         }catch (\Exception $exception){
             return response()->json(['error' => $exception->getMessage()]);
         }
