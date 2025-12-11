@@ -30,7 +30,6 @@
                                                             <i class="fa-solid fa-trash-alt text-danger"></i></a>
                                                     </div>
                                                 @endif
-
                                             </div>
                                             {{ $message->message  }}
                                         </div>

@@ -12,6 +12,7 @@ window.Echo = new Echo({
 });
 
 import axios from 'axios';
+
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
@@ -44,6 +45,7 @@ clearMessage.addEventListener('click', (event) => {
     event.preventDefault();
     inputMessage.value = '';
 })
+
 //// update users online list ////
 function updateUsers() {
     onlineUsersItems = '';
@@ -111,7 +113,7 @@ window.typingWhisper = function (event) {
 //// method for send message to server for save ////
 sendMessageBtn.addEventListener('click', (event) => {
     event.preventDefault();
-    if(inputMessage.value === '') {
+    if (inputMessage.value === '') {
         document.getElementById('messageError').style.display = 'block';
         return null
     }
@@ -129,22 +131,27 @@ sendMessageBtn.addEventListener('click', (event) => {
 
 // to listen other user / users on PresenceChannel
 // use join() method instead channel() its very important
-window.Echo.join(`chat.${roomId}`).listen('.message.sent',(e)=>{
+window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     // update the chat box with incoming messages
     let messageElement = '';
     let message = e.message;
     let sender = e.sender;
     // need refactor for add remove message btn/icon
     messageElement += '<div class="card my-1"> <div class="card-body">' +
-        '<h6 class="card-subtitle mb-2 text-muted">'+sender+'</h6>'
+        '<h6 class="card-subtitle mb-2 text-muted">' + sender + '</h6>'
         + message +
         '</div> </div>';
     boxMessage.innerHTML += messageElement;
 })
 
-document.querySelectorAll('.removeMessage').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
+let current_message_item = null;
+document.querySelectorAll('.removeMessage').forEach(btn => {
+
+    btn.addEventListener('click', () => {
         let id = parseInt(btn.getAttribute('data-messageId'))
-        console.log(id);
+
+        current_message_item = document.getElementById(`removeMessage-${id}`);
+        console.log(current_message_item)
+
     })
 })
