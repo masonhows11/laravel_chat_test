@@ -4,7 +4,8 @@
 @endsection
 @section('main')
     <input type="hidden" id="roomId" value="{{ $roomId }}">
-    <div class="container vh-100">
+    <div class="container">
+
         <div class="row d-flex align-items-center justify-content-center">
             <div class="col-md-12">
                 <div class="row">
@@ -19,8 +20,7 @@
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between">
                                                 <div>
-                                                    <span
-                                                        class="card-subtitle text-muted">{{ $message->user->name }}</span>
+                                                    <span class="card-subtitle text-muted">{{ $message->user->name }}</span>
                                                 </div>
                                                 @if( auth()->id() == $message->user->id )
                                                     <div><a id="removeMessage-{{$message->id}}"
@@ -64,7 +64,7 @@
                     </div>
                     <div class="col-md-4">
                         <h3 class="text-center ">Online users</h3>
-                        <div class="border border-3 rounded rounded-2 mt-4 h-75 overflow-y-auto">
+                        <div class="border border-3 rounded rounded-2 mt-4 mh-100 overflow-y-auto">
                             <ul class="list-group list-group-flush" id="onlineUsers"></ul>
                         </div>
                     </div>

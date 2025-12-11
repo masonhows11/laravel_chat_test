@@ -137,10 +137,20 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     let message = e.message;
     let sender = e.sender;
     // need refactor for add remove message btn/icon
-    messageElement += '<div class="card my-1"> <div class="card-body">' +
-        '<h6 class="card-subtitle mb-2 text-muted">' + sender + '</h6>'
-        + message +
-        '</div> </div>';
+    messageElement +=
+        '<div class="card my-2"> ' +
+        '<div class="card-body">' +
+        '<div class="d-flex justify-content-between">' +
+        '<div>'+
+        '<span class="card-subtitle text-muted">+ sender +</span>' +
+        '</div>'+
+        '<div>'+
+        '<a id="removeMessage-" data-messageId="" href="javascript:void(0)" class="mb-4 removeMessage">' +
+        '<i class="fa-solid fa-trash-alt text-danger"></i>' +
+        '</a>' +
+        '</div>'+
+        '</div>'+
+        '</div>';
     boxMessage.innerHTML += messageElement;
 })
 
