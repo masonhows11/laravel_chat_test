@@ -2,7 +2,6 @@
 @section('title')
     chat room
 @endsection
-
 @section('main')
     <input type="hidden" id="roomId" value="{{ $roomId }}">
     <div class="container vh-100">
