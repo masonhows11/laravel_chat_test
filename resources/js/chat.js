@@ -183,11 +183,9 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
 boxMessage.addEventListener("click",function (e) {
     const btn = e.target.closest(".btnRemoveMessage");
     if(!btn) return;
-
-    console.log(btn)
     const message_id = parseInt(btn.getAttribute('data-messageId'));
-
-
+    console.log(message_id)
+    // stop here
     // btn.closest('.card').remove();
 })
 
