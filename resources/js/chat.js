@@ -137,26 +137,47 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     let messageId = e.id;
     let message = e.message;
     let sender = e.sender;
+    //// better way
+    let card = document.createElement('div');
+    card.className = 'card my-2';
+    card.innerHTML = `
+    <div class="card-body">
+         <div class="d-flex justify-content-between">
+         <div>
+         <span class="card-subtitle text-muted">${sender}</span>
+         </div>
+         <div><button id="removeMessage-${messageId}" data-messageId="${messageId}" class="mb-4 removeMessage">
+         <i class="fa-solid fa-trash-alt text-danger"></i>
+         </button>
+         </div>
+         </div>
+         <p>${message}</p>
+         </div>
+    `;
+    boxMessage.appendChild(card);
+
+
+    //// old way
     // need refactor for add remove message btn/icon
-    messageElement +=
-        '<div class="card my-2"> ' +
-        '<div class="card-body">' +
-        '<div class="d-flex justify-content-between">' +
-        '<div>' +
-        '<span class="card-subtitle text-muted">' + sender + '</span>' +
-        '</div>' +
-        '<div>' +
-        '<button id="removeMessage-' + messageId + '"  ' +
-        'data-messageId="' + messageId + '" ' +
-        ' class="mb-4 removeMessage">' +
-        '<i class="fa-solid fa-trash-alt text-danger"></i>' +
-        '</button>' +
-        '</div>' +
-        '</div>' +
-        '<p>'+ message +'</p>' +
-        '</div>' +
-        '</div>';
-    boxMessage.innerHTML += messageElement;
+    // messageElement +=
+    //     '<div class="card my-2"> ' +
+    //     '<div class="card-body">' +
+    //     '<div class="d-flex justify-content-between">' +
+    //     '<div>' +
+    //     '<span class="card-subtitle text-muted">' + sender + '</span>' +
+    //     '</div>' +
+    //     '<div>' +
+    //     '<button id="removeMessage-' + messageId + '"  ' +
+    //     'data-messageId="' + messageId + '" ' +
+    //     ' class="mb-4 removeMessage">' +
+    //     '<i class="fa-solid fa-trash-alt text-danger"></i>' +
+    //     '</button>' +
+    //     '</div>' +
+    //     '</div>' +
+    //     '<p>'+ message +'</p>' +
+    //     '</div>' +
+    //     '</div>';
+    // boxMessage.innerHTML += messageElement;
 })
 
 let current_message_item = null;
