@@ -14,6 +14,7 @@ class ChatController extends Controller
     //
     public function index()
     {
+
         try {
 
             $roomId = auth()->user()->rooms()->first()->id;

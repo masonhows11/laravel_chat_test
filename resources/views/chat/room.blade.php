@@ -20,13 +20,19 @@
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between">
                                                 <div>
-                                                    <span class="card-subtitle text-muted">{{ $message->user->name }}</span>
+                                                    <span
+                                                        class="card-subtitle text-muted">{{ $message->user->name }}</span>
                                                 </div>
-                                                <div><a id="removeMessage-{{$message->id}}"
-                                                        data-messageId="{{ $message->id }}"
-                                                        href="javascript:void(0)"
-                                                        class="mb-4 removeMessage">
-                                                        <i class="fa-solid fa-trash-alt text-danger"></i></a></div>
+                                                @if( auth()->id() == $message->user->id )
+                                                @else
+                                                    <div><a id="removeMessage-{{$message->id}}"
+                                                            data-messageId="{{ $message->id }}"
+                                                            href="javascript:void(0)"
+                                                            class="mb-4 removeMessage">
+                                                            <i class="fa-solid fa-trash-alt text-danger"></i></a>
+                                                    </div>
+                                                @endif
+
                                             </div>
                                             {{ $message->message  }}
                                         </div>
