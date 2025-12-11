@@ -25,7 +25,7 @@
                                                 @if( auth()->id() == $message->user->id )
                                                     <div><button id="removeMessage-{{$message->id}}"
                                                             data-messageId="{{ $message->id }}"
-                                                            class="mb-4 removeMessage">
+                                                            class="mb-4 btnRemoveMessage">
                                                             <i class="fa-solid fa-trash-alt text-danger"></i></button>
                                                     </div>
                                                 @endif

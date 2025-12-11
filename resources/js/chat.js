@@ -146,7 +146,7 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
          <div>
          <span class="card-subtitle text-muted">${sender}</span>
          </div>
-         <div><button id="removeMessage-${messageId}" data-messageId="${messageId}" class="mb-4 removeMessage">
+         <div><button id="removeMessage-${messageId}" data-messageId="${messageId}" class="mb-4 btnRemoveMessage">
          <i class="fa-solid fa-trash-alt text-danger"></i>
          </button>
          </div>
@@ -180,14 +180,15 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     // boxMessage.innerHTML += messageElement;
 })
 
-let current_message_item = null;
-document.querySelectorAll('.removeMessage').forEach(btn => {
+boxMessage.addEventListener("click",function (e) {
+    const btn = e.target.closest(".btnRemoveMessage");
+    if(!btn) return;
 
-    btn.addEventListener('click', () => {
-        let id = parseInt(btn.getAttribute('data-messageId'))
+    console.log(btn)
+    const message_id = parseInt(btn.getAttribute('data-messageId'));
 
-        current_message_item = document.getElementById(`removeMessage-${id}`);
-        console.log(current_message_item)
 
-    })
+    // btn.closest('.card').remove();
 })
+
+
