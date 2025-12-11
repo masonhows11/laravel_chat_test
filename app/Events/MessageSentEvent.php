@@ -38,6 +38,11 @@ class MessageSentEvent implements ShouldBroadcast
                 'sender' => $this->user->name,
                 'id' => $this->message->id];
     }
+
+    public function broadcastAs()
+    {
+        return 'message.sent';
+    }
     /**
      * Get the channels the event should broadcast on.
      *
@@ -47,7 +52,8 @@ class MessageSentEvent implements ShouldBroadcast
     {
         return [
             // new PrivateChannel('channel-name'),
-            //new PrivateChannel('chat.' . $this->user->id),
+
+            // new PrivateChannel('chat.' . $this->user->id),
             new PresenceChannel('chat.' . $this->roomId),
         ];
     }

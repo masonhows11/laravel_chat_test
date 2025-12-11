@@ -1,3 +1,16 @@
+import Echo from 'laravel-echo';
+import Pusher from 'pusher-js';
+
+window.Pusher = Pusher;
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: import.meta.env.VITE_PUSHER_APP_KEY,
+    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+    forceTLS: true,
+    encrypted: true,
+});
+
 import axios from 'axios';
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -116,12 +129,11 @@ sendMessageBtn.addEventListener('click', (event) => {
 
 // to listen other user / users on PresenceChannel
 // use join() method instead channel() its very important
-window.Echo.join(`chat.${roomId}`).listen('MessageSentEvent',(e)=>{
+window.Echo.join(`chat.${roomId}`).listen('.message.sent',(e)=>{
     // update the chat box with incoming messages
     let messageElement = '';
     let message = e.message;
     let sender = e.sender;
-    console.log(e)
     // need refactor for add remove message btn/icon
     messageElement += '<div class="card my-1"> <div class="card-body">' +
         '<h6 class="card-subtitle mb-2 text-muted">'+sender+'</h6>'
