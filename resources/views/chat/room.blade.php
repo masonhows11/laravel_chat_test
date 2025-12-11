@@ -24,7 +24,6 @@
                                                         class="card-subtitle text-muted">{{ $message->user->name }}</span>
                                                 </div>
                                                 @if( auth()->id() == $message->user->id )
-                                                @else
                                                     <div><a id="removeMessage-{{$message->id}}"
                                                             data-messageId="{{ $message->id }}"
                                                             href="javascript:void(0)"
