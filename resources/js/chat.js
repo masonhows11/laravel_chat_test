@@ -146,16 +146,15 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
         '<span class="card-subtitle text-muted">' + sender + '</span>' +
         '</div>' +
         '<div>' +
-        '<a id="removeMessage-'+messageId+'"  ' +
-        'data-messageId="'+messageId+'" ' +
-        'href="javascript:void(0)"' +
+        '<button id="removeMessage-' + messageId + '"  ' +
+        'data-messageId="' + messageId + '" ' +
         ' class="mb-4 removeMessage">' +
         '<i class="fa-solid fa-trash-alt text-danger"></i>' +
-        '</a>' +
+        '</button>' +
         '</div>' +
         '</div>' +
-        + message +
-        '</div>'+
+        '<p>'+ message +'</p>' +
+        '</div>' +
         '</div>';
     boxMessage.innerHTML += messageElement;
 })

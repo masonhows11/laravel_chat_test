@@ -23,15 +23,14 @@
                                                     <span class="card-subtitle text-muted">{{ $message->user->name }}</span>
                                                 </div>
                                                 @if( auth()->id() == $message->user->id )
-                                                    <div><a id="removeMessage-{{$message->id}}"
+                                                    <div><button id="removeMessage-{{$message->id}}"
                                                             data-messageId="{{ $message->id }}"
-                                                            href="javascript:void(0)"
                                                             class="mb-4 removeMessage">
-                                                            <i class="fa-solid fa-trash-alt text-danger"></i></a>
+                                                            <i class="fa-solid fa-trash-alt text-danger"></i></button>
                                                     </div>
                                                 @endif
                                             </div>
-                                            {{ $message->message  }}
+                                           <p> {{ $message->message  }}</p>
                                         </div>
                                     </div>
                                 @endforeach
