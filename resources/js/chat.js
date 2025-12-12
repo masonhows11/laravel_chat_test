@@ -146,22 +146,27 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
          <div class="d-flex justify-content-between">
          <div>
          <span class="card-subtitle text-muted">${sender}</span>
-         </div>
-         <div>
-         <button id="removeMessage-${messageId}" data-messageId="${messageId}" class="mb-4 border border-0 bg-transparent btnRemoveMessage">
-         <i class="fa-solid fa-trash-alt text-danger"></i>
-         </button>
-         </div>
-         </div>
-         <p>${message}</p>
-         </div>
-    `;
-    boxMessage.appendChild(card);
-})
+         </div>`;
 
-boxMessage.addEventListener("click",function (e) {
+    if (current_id == user_id)
+    {
+    card.innerHTML += `<div>
+        <button id="removeMessage-${messageId}" data-messageId="${messageId}"
+                className="mb-4 border border-0 bg-transparent btnRemoveMessage">
+            <i className="fa-solid fa-trash-alt text-danger"></i>
+        </button>
+    </div>`;
+    }
+
+    card.innerHTML += `</div>
+    <p>${message}</p>
+    </div>`;
+    boxMessage.appendChild(card);
+    })
+
+boxMessage.addEventListener("click", function (e) {
     const btn = e.target.closest(".btnRemoveMessage");
-    if(!btn) return;
+    if (!btn) return;
     const message_id = parseInt(btn.getAttribute('data-messageId'));
     console.log(message_id)
     // stop here
