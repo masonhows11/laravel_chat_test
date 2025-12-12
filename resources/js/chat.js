@@ -137,7 +137,6 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     let user_id = e.user_id;
     let sender = e.sender;
     addMessage(sender, message, messageId, user_id)
-
     if (current_id != user_id)
     {
         let alert = 'هی کسخل یک پیام جدید داری'
@@ -150,8 +149,7 @@ function addMessage(sender, message, messageId, user_id) {
     let card = document.createElement('div');
     card.className = 'card my-2';
     card.innerHTML = '';
-    let element = '';
-    element =
+    let  element =
         `<div class="card-body">
       <div class="d-flex justify-content-between">
         <div>
