@@ -139,8 +139,9 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     addMessage(sender, message, messageId, user_id)
     if (current_id != user_id)
     {
-        let alert = 'هی کسخل یک پیام جدید داری'
+        let alert = 'هی خل یک پیام جدید داری'
         messageAlert(alert)
+        scrollDownBox()
     }
 
 })
@@ -169,6 +170,14 @@ function addMessage(sender, message, messageId, user_id) {
     </div>`;
     card.innerHTML = element;
     boxMessage.appendChild(card);
+}
+
+function scrollDownBox(){
+
+    boxMessage.scrollTo({
+        top: boxMessage.scrollHeight,
+        behavior:"smooth",
+    })
 }
 
 function messageAlert(message) {
