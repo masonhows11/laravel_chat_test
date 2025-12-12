@@ -146,7 +146,8 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
          <div>
          <span class="card-subtitle text-muted">${sender}</span>
          </div>
-         <div><button id="removeMessage-${messageId}" data-messageId="${messageId}" class="mb-4 btnRemoveMessage">
+         <div>
+         <button id="removeMessage-${messageId}" data-messageId="${messageId}" class="mb-4 border border-0 bg-transparent btnRemoveMessage">
          <i class="fa-solid fa-trash-alt text-danger"></i>
          </button>
          </div>

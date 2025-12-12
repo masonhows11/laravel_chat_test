@@ -36,6 +36,7 @@ class MessageSentEvent implements ShouldBroadcast
     {
         return ['message' => $this->message->message,
                 'sender' => $this->user->name,
+                'user_id' => $this->user->id,
                 'id' => $this->message->id];
     }
 
