@@ -137,9 +137,10 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     let user_id = e.user_id;
     let sender = e.sender;
     addMessage(sender, message, messageId, user_id)
-    let alert = 'هی کسخل یک پیام جدید داری'
+
     if (current_id != user_id)
     {
+        let alert = 'هی کسخل یک پیام جدید داری'
         messageAlert(alert)
     }
 
