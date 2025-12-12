@@ -133,7 +133,7 @@ sendMessageBtn.addEventListener('click', (event) => {
 // use join() method instead channel() its very important
 window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     // update the chat box with incoming messages
-    let messageElement = '';
+
     let messageId = e.id;
     let message = e.message;
     let user_id = e.user_id;
@@ -157,29 +157,6 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
          </div>
     `;
     boxMessage.appendChild(card);
-
-
-    //// old way
-    // need refactor for add remove message btn/icon
-    // messageElement +=
-    //     '<div class="card my-2"> ' +
-    //     '<div class="card-body">' +
-    //     '<div class="d-flex justify-content-between">' +
-    //     '<div>' +
-    //     '<span class="card-subtitle text-muted">' + sender + '</span>' +
-    //     '</div>' +
-    //     '<div>' +
-    //     '<button id="removeMessage-' + messageId + '"  ' +
-    //     'data-messageId="' + messageId + '" ' +
-    //     ' class="mb-4 removeMessage">' +
-    //     '<i class="fa-solid fa-trash-alt text-danger"></i>' +
-    //     '</button>' +
-    //     '</div>' +
-    //     '</div>' +
-    //     '<p>'+ message +'</p>' +
-    //     '</div>' +
-    //     '</div>';
-    // boxMessage.innerHTML += messageElement;
 })
 
 boxMessage.addEventListener("click",function (e) {
