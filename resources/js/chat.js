@@ -138,31 +138,35 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     let message = e.message;
     let user_id = e.user_id;
     let sender = e.sender;
-    //// better way
+    addMessage(sender, message, messageId, user_id)
+})
+
+function addMessage(sender, message, messageId, user_id) {
     let card = document.createElement('div');
     card.className = 'card my-2';
-    card.innerHTML = `
-    <div class="card-body">
-         <div class="d-flex justify-content-between">
-         <div>
+    card.innerHTML = '';
+    let element = '';
+    element =
+        `<div class="card-body">
+      <div class="d-flex justify-content-between">
+        <div>
          <span class="card-subtitle text-muted">${sender}</span>
-         </div>`;
-
-    if (current_id == user_id)
-    {
-    card.innerHTML += `<div>
+        </div>`;
+    if (current_id == user_id) {
+        element +=
+            `<div>
         <button id="removeMessage-${messageId}" data-messageId="${messageId}"
-                className="mb-4 border border-0 bg-transparent btnRemoveMessage">
-            <i className="fa-solid fa-trash-alt text-danger"></i>
+                class="mb-4 border border-0 bg-transparent btnRemoveMessage">
+            <i class="fa-solid fa-trash-alt text-danger"></i>
         </button>
     </div>`;
     }
-
-    card.innerHTML += `</div>
+    element += `</div>
     <p>${message}</p>
     </div>`;
+    card.innerHTML = element;
     boxMessage.appendChild(card);
-    })
+}
 
 boxMessage.addEventListener("click", function (e) {
     const btn = e.target.closest(".btnRemoveMessage");
