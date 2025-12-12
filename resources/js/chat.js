@@ -136,6 +136,7 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     let messageElement = '';
     let messageId = e.id;
     let message = e.message;
+    let user_id = e.user_id;
     let sender = e.sender;
     //// better way
     let card = document.createElement('div');
