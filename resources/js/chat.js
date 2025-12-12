@@ -2,7 +2,6 @@ import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 
 window.Pusher = Pusher;
-
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: import.meta.env.VITE_PUSHER_APP_KEY,
@@ -10,7 +9,6 @@ window.Echo = new Echo({
     forceTLS: true,
     encrypted: true,
 });
-
 import axios from 'axios';
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -139,6 +137,12 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     let user_id = e.user_id;
     let sender = e.sender;
     addMessage(sender, message, messageId, user_id)
+    let alert = 'هی کسخل یک پیام جدید داری'
+    if (current_id != user_id)
+    {
+        messageAlert(alert)
+    }
+
 })
 
 function addMessage(sender, message, messageId, user_id) {
@@ -166,6 +170,24 @@ function addMessage(sender, message, messageId, user_id) {
     </div>`;
     card.innerHTML = element;
     boxMessage.appendChild(card);
+}
+
+function messageAlert(message) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+    Toast.fire({
+        icon: "success",
+        title: message
+    });
 }
 
 boxMessage.addEventListener("click", function (e) {
