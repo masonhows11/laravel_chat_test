@@ -117,7 +117,7 @@ sendMessageBtn.addEventListener('click', (event) => {
         document.getElementById('messageError').style.display = 'block';
         return null
     }
-    saveMessage(current_id,roomId,inputMessage);
+    saveMessage(current_id, roomId, inputMessage);
 })
 
 function saveMessage(event) {
@@ -133,7 +133,8 @@ function saveMessage(event) {
     inputMessage.value = '';
 }
 
-//// to listen other user / users on PresenceChannel  use join() method instead channel() its very important ////
+//// to listen other user / users on PresenceChannel
+//// use join() method instead channel() its very important
 window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     // update the chat box with incoming messages
     let messageId = e.id;
@@ -148,12 +149,39 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     }
 })
 
-//// listen for message.delete event to delete message element for other users ////
+function addMessage(sender, message, messageId, user_id) {
+    let card = document.createElement('div');
+    card.className = 'card my-2';
+    card.innerHTML = '';
+    let element =
+        `<div class="card-body">
+        <div class="d-flex justify-content-between">
+        <div>
+        <span class="card-subtitle text-muted">${sender}</span>
+        </div>`;
+    if (current_id === user_id) {
+        element +=
+        `<div>
+        <button id="removeMessage-${messageId}" data-messageId="${messageId}"
+                class="mb-4 border border-0 bg-transparent btnRemoveMessage">
+            <i class="fa-solid fa-trash-alt text-danger"></i>
+        </button>
+    </div>`;
+    }
+    element += `</div>
+    <p>${message}</p>
+    </div>`;
+    card.innerHTML = element;
+    boxMessage.appendChild(card);
+}
+
+//// listen for message.delete event to
+//// delete message element for other users
 window.Echo.join(`chat.${roomId}`).listen('.message.delete', (e) => {
     let messageId = e.id;
     removeMessageElement(messageId)
-
 })
+
 function removeMessageElement(messageId) {
 
 }
@@ -188,10 +216,10 @@ boxMessage.addEventListener("click", function (e) {
     const btn = e.target.closest(".btnRemoveMessage");
     if (!btn) return;
     const message_id = parseInt(btn.getAttribute('data-messageId'));
-    removeMessage(btn,message_id)
+    removeMessage(btn, message_id)
 })
 
-function removeMessage(btn,message_id) {
+function removeMessage(btn, message_id) {
     axios.get('/delete/message', {
         params: {
             message_id: message_id,
