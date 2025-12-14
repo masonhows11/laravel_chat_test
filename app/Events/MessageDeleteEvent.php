@@ -4,7 +4,6 @@ namespace App\Events;
 
 use App\Models\Message;
 use App\Models\User;
-//use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -13,7 +12,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageSentEvent implements ShouldBroadcast
+class MessageDeleteEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -31,19 +30,17 @@ class MessageSentEvent implements ShouldBroadcast
         $this->roomId = $roomId;
     }
 
-    // send data with broadcastWith method
     public function broadcastWith(): array
     {
-        return ['message' => $this->message->message,
-                'sender' => $this->user->name,
-                'user_id' => $this->user->id,
-                'id' => $this->message->id];
+        return ['message_id' => $this->message->id,
+            'user_id' => $this->user->id,
+            'id' => $this->message->id];
     }
-
     public function broadcastAs(): string
     {
-        return 'message.sent';
+        return 'message.delete';
     }
+
     /**
      * Get the channels the event should broadcast on.
      *
@@ -52,10 +49,9 @@ class MessageSentEvent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            // new PrivateChannel('channel-name'),
 
-            // new PrivateChannel('chat.' . $this->user->id),
-            new PresenceChannel('chat.' . $this->roomId),
+            // new PrivateChannel('channel-name'),
+            new PresenceChannel('chat.',$this->room)
         ];
     }
 }

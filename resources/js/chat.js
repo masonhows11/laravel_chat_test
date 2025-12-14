@@ -103,8 +103,7 @@ function isTypingHandle(other_name) {
 
 //// listen for user typing ////
 window.typingWhisper = function (event) {
-    // this code send data like name,id,message,with whisper
-    // to other user/users
+    // this code send data like name,id,message,with whisper to other user/users
     chatChannel.whisper("typing", {
         user_name: current_name,
     })
@@ -134,8 +133,8 @@ function saveMessage(event) {
     inputMessage.value = '';
 }
 
-// to listen other user / users on PresenceChannel
-// use join() method instead channel() its very important
+//// to listen other user / users on PresenceChannel  use join() method instead channel() its very important ////
+
 window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     // update the chat box with incoming messages
     let messageId = e.id;
@@ -144,7 +143,7 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     let sender = e.sender;
     addMessage(sender, message, messageId, user_id)
     if (current_id !== user_id) {
-        let alert = 'هی خل یک پیام جدید داری'
+        let alert = 'یک پیام جدید داری'
         messageAlert(alert)
         scrollDownBox()
     }
