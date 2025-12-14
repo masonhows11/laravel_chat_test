@@ -11,6 +11,9 @@ window.Echo = new Echo({
 });
 import axios from 'axios';
 
+document.addEventListener('DOMContentLoaded', () => {
+  scrollDownBox();
+})
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
