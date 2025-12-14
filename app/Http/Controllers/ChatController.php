@@ -49,7 +49,7 @@ class ChatController extends Controller
         try {
             $user = Message::find($request->message_id);
             if (auth()->id() == $user->user_id) {
-                Message::destroy($request->id);
+                Message::destroy($request->message_id);
                 return response()->json(['success' => true], 200);
             };
         } catch (\Exception $exception) {

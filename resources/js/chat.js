@@ -12,7 +12,7 @@ window.Echo = new Echo({
 import axios from 'axios';
 
 document.addEventListener('DOMContentLoaded', () => {
-  scrollDownBox();
+    scrollDownBox();
 })
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -118,6 +118,10 @@ sendMessageBtn.addEventListener('click', (event) => {
         document.getElementById('messageError').style.display = 'block';
         return null
     }
+    saveMessage(current_id,roomId,inputMessage);
+})
+
+function saveMessage(event) {
     axios.post('/store/message', {
         user_id: current_id,
         room_id: parseInt(roomId),
@@ -128,13 +132,12 @@ sendMessageBtn.addEventListener('click', (event) => {
         console.log(error);
     })
     inputMessage.value = '';
-})
+}
 
 // to listen other user / users on PresenceChannel
 // use join() method instead channel() its very important
 window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     // update the chat box with incoming messages
-
     let messageId = e.id;
     let message = e.message;
     let user_id = e.user_id;
@@ -145,7 +148,6 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
         messageAlert(alert)
         scrollDownBox()
     }
-
 })
 
 function addMessage(sender, message, messageId, user_id) {
@@ -205,7 +207,10 @@ boxMessage.addEventListener("click", function (e) {
     const btn = e.target.closest(".btnRemoveMessage");
     if (!btn) return;
     const message_id = parseInt(btn.getAttribute('data-messageId'));
-    console.log(message_id)
+    removeMessage(btn,message_id)
+})
+
+function removeMessage(btn,message_id) {
     axios.get('/delete/message', {
         params: {
             message_id: message_id,
@@ -213,7 +218,7 @@ boxMessage.addEventListener("click", function (e) {
     }).then(function (response) {
         if (response.data) {
             if (response.data['success'] === true) {
-                btn.remove();
+                btn.closest('.card').remove();
             } else {
                 return null;
             }
@@ -221,8 +226,5 @@ boxMessage.addEventListener("click", function (e) {
     }).catch(function (error) {
         console.log(error)
     })
-    // stop here
-    // btn.closest('.card').remove();
-})
-
+}
 
