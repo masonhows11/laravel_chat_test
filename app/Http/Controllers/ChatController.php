@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\MessageSentEvent;
 use App\Models\Message;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 // use Illuminate\Support\Facades\DB;
@@ -44,9 +45,13 @@ class ChatController extends Controller
 
     public function delete(Request $request)
     {
+
         try {
-            Message::destroy($request->id);
-            return response()->json(['success' => true], 200);
+            $user = Message::find($request->message_id);
+            if (auth()->id() == $user->user_id) {
+                Message::destroy($request->id);
+                return response()->json(['success' => true], 200);
+            };
         } catch (\Exception $exception) {
             return response()->json(['error' => $exception->getMessage()]);
         }

@@ -137,8 +137,7 @@ window.Echo.join(`chat.${roomId}`).listen('.message.sent', (e) => {
     let user_id = e.user_id;
     let sender = e.sender;
     addMessage(sender, message, messageId, user_id)
-    if (current_id != user_id)
-    {
+    if (current_id !== user_id) {
         let alert = 'هی خل یک پیام جدید داری'
         messageAlert(alert)
         scrollDownBox()
@@ -150,13 +149,13 @@ function addMessage(sender, message, messageId, user_id) {
     let card = document.createElement('div');
     card.className = 'card my-2';
     card.innerHTML = '';
-    let  element =
+    let element =
         `<div class="card-body">
       <div class="d-flex justify-content-between">
         <div>
          <span class="card-subtitle text-muted">${sender}</span>
         </div>`;
-    if (current_id == user_id) {
+    if (current_id === user_id) {
         element +=
             `<div>
         <button id="removeMessage-${messageId}" data-messageId="${messageId}"
@@ -170,13 +169,14 @@ function addMessage(sender, message, messageId, user_id) {
     </div>`;
     card.innerHTML = element;
     boxMessage.appendChild(card);
+    scrollDownBox()
 }
 
-function scrollDownBox(){
+function scrollDownBox() {
 
     boxMessage.scrollTo({
         top: boxMessage.scrollHeight,
-        behavior:"smooth",
+        behavior: "smooth",
     })
 }
 
@@ -203,6 +203,21 @@ boxMessage.addEventListener("click", function (e) {
     if (!btn) return;
     const message_id = parseInt(btn.getAttribute('data-messageId'));
     console.log(message_id)
+    axios.get('/delete/message', {
+        params: {
+            message_id: message_id,
+        }
+    }).then(function (response) {
+        if (response.data) {
+            if (response.data['success'] === true) {
+                btn.remove();
+            } else {
+                return null;
+            }
+        }
+    }).catch(function (error) {
+        console.log(error)
+    })
     // stop here
     // btn.closest('.card').remove();
 })

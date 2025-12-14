@@ -15,6 +15,8 @@ Route::group(['middleware' => ['web','auth']], function () {
 
     Route::post('/store/message', [ChatController::class,'store'])->name('store.message');
 
+    Route::get('/delete/message', [ChatController::class,'delete'])->name('delete.message');
+
 });
 
 Route::view('dashboard', 'dashboard')
