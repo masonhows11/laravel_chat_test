@@ -173,6 +173,7 @@ function addMessage(sender, message, messageId, user_id) {
     </div>`;
     card.innerHTML = element;
     boxMessage.appendChild(card);
+    scrollDownBox()
 }
 
 //// listen for message.delete event to
@@ -181,13 +182,10 @@ window.Echo.join(`chat.${roomId}`).listen('.message.delete', (e) => {
     let messageId = e.id;
     removeMessageElement(messageId)
 })
-
 function removeMessageElement(messageId) {
-
 }
 
 function scrollDownBox() {
-
     boxMessage.scrollTo({
         top: boxMessage.scrollHeight,
         behavior: "smooth",
