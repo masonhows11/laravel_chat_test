@@ -48,12 +48,16 @@ class ChatController extends Controller
     {
 
         try {
-            $user = Message::find($request->message_id);
-            if (auth()->id() == $user->user_id) {
+            $message = Message::find($request->message_id);
+            $roomId = $message->room_id;
+            $messageId = $message->id;
+
+            if (auth()->id() == $message->user_id) {
                 Message::destroy($request->message_id);
                 return response()->json(['success' => true], 200);
             };
-            event(new MessageDeleteEvent($user->room_id, $request->message_id, auth()->user()));
+
+            event(new MessageDeleteEvent($roomId, $messageId, auth()->user()));
         } catch (\Exception $exception) {
             return response()->json(['error' => $exception->getMessage()]);
         }
