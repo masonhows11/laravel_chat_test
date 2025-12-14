@@ -161,7 +161,7 @@ function addMessage(sender, message, messageId, user_id) {
         </div>`;
     if (current_id === user_id) {
         element +=
-        `<div>
+            `<div>
         <button id="removeMessage-${messageId}" data-messageId="${messageId}"
                 class="mb-4 border border-0 bg-transparent btnRemoveMessage">
             <i class="fa-solid fa-trash-alt text-danger"></i>
@@ -180,8 +180,10 @@ function addMessage(sender, message, messageId, user_id) {
 //// delete message element for other users
 window.Echo.join(`chat.${roomId}`).listen('.message.delete', (e) => {
     let messageId = e.id;
+    console.log(messageId)
     removeMessageElement(messageId)
 })
+
 function removeMessageElement(messageId) {
 }
 
@@ -214,6 +216,7 @@ boxMessage.addEventListener("click", function (e) {
     const btn = e.target.closest(".btnRemoveMessage");
     if (!btn) return;
     const message_id = parseInt(btn.getAttribute('data-messageId'));
+    console.log(message_id)
     removeMessage(btn, message_id)
 })
 
@@ -225,7 +228,8 @@ function removeMessage(btn, message_id) {
     }).then(function (response) {
         if (response.data) {
             if (response.data['success'] === true) {
-                btn.closest('.card').remove();
+                // btn.closest('.card').remove();
+                console.log('true')
             } else {
                 return null;
             }
