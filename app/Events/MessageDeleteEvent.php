@@ -17,24 +17,23 @@ class MessageDeleteEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public User $user;
-    public Message $message;
+    public string $message_id;
     public string $roomId;
     /**
      * Create a new event instance.
      */
-    public function __construct($roomId,Message $message ,User $user)
+    public function __construct($roomId,$message_id ,User $user)
     {
         //
         $this->user = $user;
-        $this->message = $message;
+        $this->message_id = $message_id;
         $this->roomId = $roomId;
     }
 
     public function broadcastWith(): array
     {
-        return ['message_id' => $this->message->id,
-            'user_id' => $this->user->id,
-            'id' => $this->message->id];
+        return ['message_id' => $this->message_id,
+            'user_id' => $this->user->id,];
     }
     public function broadcastAs(): string
     {
@@ -51,7 +50,7 @@ class MessageDeleteEvent implements ShouldBroadcast
         return [
 
             // new PrivateChannel('channel-name'),
-            new PresenceChannel('chat.',$this->room)
+            new PresenceChannel('chat.',$this->roomId)
         ];
     }
 }

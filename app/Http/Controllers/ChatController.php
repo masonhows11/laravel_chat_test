@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageDeleteEvent;
 use App\Events\MessageSentEvent;
 use App\Models\Message;
 use App\Models\Task;
@@ -52,6 +53,7 @@ class ChatController extends Controller
                 Message::destroy($request->message_id);
                 return response()->json(['success' => true], 200);
             };
+            event(new MessageDeleteEvent($user->room_id, $request->message_id, auth()->user()));
         } catch (\Exception $exception) {
             return response()->json(['error' => $exception->getMessage()]);
         }
