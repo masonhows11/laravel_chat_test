@@ -110,7 +110,8 @@ window.typingWhisper = function (event) {
 }
 
 
-//// method for send message to server for save ////
+//// save message section ////
+
 sendMessageBtn.addEventListener('click', (event) => {
     event.preventDefault();
     if (inputMessage.value === '') {
@@ -206,10 +207,10 @@ function messageAlert(message) {
 }
 
 
-//// listen for message.delete event to
-//// delete message element for other users
 
-////
+
+//// delete message section ////
+
 function disableDeleteMessage() {
     let allBtn = document.querySelectorAll('.btnRemoveMessage');
     allBtn.forEach(el => {
@@ -217,7 +218,7 @@ function disableDeleteMessage() {
         el.style.opacity = 0.2;
     })
 }
-////
+
 function enableDeleteMessage() {
     let allBtn = document.querySelectorAll('.btnRemoveMessage');
     setTimeout(function (){
@@ -226,10 +227,10 @@ function enableDeleteMessage() {
             el.style.opacity = 1;
         })
     },1000)
-
-
 }
-////
+
+//// listen for message.delete event to
+//// delete message element for other users
 window.Echo.join(`chat.${roomId}`).listen('.message.delete', (e) => {
     let messageId = e.message_id;
     // let user_id = e.user_id;
