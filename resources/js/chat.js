@@ -126,12 +126,11 @@ function saveMessage(event) {
         room_id: parseInt(roomId),
         message: inputMessage.value
     }).then(function (response) {
-        // console.log(response)
     }).catch(function (error) {
         Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Something went wrong!",
+            text: error.response.data.msg,
             footer: '<a href="#">خطایی رخ داده</a>'
         });
     })
@@ -219,9 +218,10 @@ window.Echo.join(`chat.${roomId}`).listen('.message.delete', (e) => {
 
 function removeMessageElement(messageId) {
     const msgElement = document.getElementById(`data-messageId-${messageId}`);
-    if(msgElement !== null){
-        msgElement.remove()
-    }
+    msgElement.remove()
+    // if(msgElement !== null){
+    //
+    // }
 }
 
 boxMessage.addEventListener("click", function (e) {
@@ -239,16 +239,17 @@ function removeMessage(btn, message_id) {
     }).then(function (response) {
         if (response.data) {
             if (response.data['success'] === true) {
-                btn.closest('.card').remove();
+                // btn.closest('.card').remove();
             } else {
                 return null;
             }
         }
     }).catch(function (error) {
+        console.log(error.response.data.msg);
         Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Something went wrong!",
+            text: error.response.data.msg,
             footer: '<a href="#">خطایی رخ داده</a>'
         });
 

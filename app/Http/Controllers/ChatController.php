@@ -50,22 +50,18 @@ class ChatController extends Controller
         try {
             $message = Message::find($request->message_id);
             if (!empty($message)) {
-
                 $roomId = $message->room_id;
                 $messageId = $message->id;
-
                 if (auth()->id() == $message->user_id) {
                     Message::destroy($request->message_id);
                     event(new MessageDeleteEvent($roomId, $messageId, auth()->user()));
                     return response()->json(['success' => true], 200);
                 } else {
-                    return response()->json(['success' => false], 403);
+                    return response()->json(['success' => false ,'msg' => 'You do not have permission to delete.'], 403);
                 }
             } else {
-                return response()->json(['success' => false], 404);
+                return response()->json(['success' => false ,'msg' => 'The requested data does not exist.'], 404);
             }
-
-
         } catch (\Exception $exception) {
             return response()->json(['error' => $exception->getMessage()]);
         }
