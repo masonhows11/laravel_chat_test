@@ -224,7 +224,7 @@ boxMessage.addEventListener("click", function (e) {
     // console.log(btn)
     const message_id = parseInt(btn.getAttribute('data-messageId'));
     // console.log(message_id)
-    //removeMessage(btn, message_id)
+    removeMessage(btn, message_id)
 })
 
 function removeMessage(btn, message_id) {
