@@ -23,10 +23,12 @@
                                                     <span class="card-subtitle text-muted">{{ $message->user->name }}</span>
                                                 </div>
                                                 @if( auth()->id() == $message->user->id )
-                                                    <div><button id="removeMessage-{{$message->id}}"
+                                                    <div>
+                                                        <button id="removeMessage-{{$message->id}}"
                                                             data-messageId="{{ $message->id }}"
                                                             class="mb-4 btnRemoveMessage border border-0 bg-transparent">
-                                                            <i class="fa-solid fa-trash-alt text-danger"></i></button>
+                                                            <i class="fa-solid fa-trash-alt text-danger"></i>
+                                                        </button>
                                                     </div>
                                                 @endif
                                             </div>

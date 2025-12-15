@@ -55,7 +55,7 @@ class ChatController extends Controller
                 if (auth()->id() == $message->user_id) {
                     Message::destroy($request->message_id);
                     event(new MessageDeleteEvent($roomId, $messageId, auth()->user()));
-                    return response()->json(['success' => true], 200);
+                    return response()->json(['success' => true ,'msg' => 'your fucking message was deleted'], 200);
                 } else {
                     return response()->json(['success' => false ,'msg' => 'You do not have permission to delete.'], 403);
                 }

@@ -180,7 +180,6 @@ function addMessage(sender, message, messageId, user_id) {
 }
 
 
-
 function scrollDownBox() {
     boxMessage.scrollTo({
         top: boxMessage.scrollHeight,
@@ -209,6 +208,23 @@ function messageAlert(message) {
 
 //// listen for message.delete event to
 //// delete message element for other users
+
+////
+function disabledDeleteMessage() {
+    let allBtn = document.querySelectorAll('.btnRemoveMessage');
+    allBtn.forEach(el => {
+        el.setAttribute("disabled", "true")
+        el.style.opacity = 0.2;
+    })
+}
+////
+function enabledDeleteMessage() {
+    let allBtn = document.querySelectorAll('.btnRemoveMessage');
+    allBtn.forEach(el => {
+        el.setAttribute("disabled", "false")
+    })
+}
+////
 window.Echo.join(`chat.${roomId}`).listen('.message.delete', (e) => {
     let messageId = e.message_id;
     // let user_id = e.user_id;
@@ -219,15 +235,13 @@ window.Echo.join(`chat.${roomId}`).listen('.message.delete', (e) => {
 function removeMessageElement(messageId) {
     const msgElement = document.getElementById(`data-messageId-${messageId}`);
     msgElement.remove()
-    // if(msgElement !== null){
-    //
-    // }
 }
 
 boxMessage.addEventListener("click", function (e) {
     const btn = e.target.closest(".btnRemoveMessage");
     if (!btn) return;
     const message_id = parseInt(btn.getAttribute('data-messageId'));
+    disabledDeleteMessage()
     removeMessage(btn, message_id)
 })
 
@@ -239,7 +253,8 @@ function removeMessage(btn, message_id) {
     }).then(function (response) {
         if (response.data) {
             if (response.data['success'] === true) {
-                // btn.closest('.card').remove();
+                console.log(response.data)
+                enabledDeleteMessage()
             } else {
                 return null;
             }
@@ -252,7 +267,7 @@ function removeMessage(btn, message_id) {
             text: error.response.data.msg,
             footer: '<a href="#">خطایی رخ داده</a>'
         });
-
     })
 }
+
 
