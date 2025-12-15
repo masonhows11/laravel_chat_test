@@ -210,7 +210,7 @@ function messageAlert(message) {
 //// delete message element for other users
 
 ////
-function disabledDeleteMessage() {
+function disableDeleteMessage() {
     let allBtn = document.querySelectorAll('.btnRemoveMessage');
     allBtn.forEach(el => {
         el.setAttribute("disabled", "true")
@@ -218,7 +218,7 @@ function disabledDeleteMessage() {
     })
 }
 ////
-function enabledDeleteMessage() {
+function enableDeleteMessage() {
     let allBtn = document.querySelectorAll('.btnRemoveMessage');
     allBtn.forEach(el => {
         el.setAttribute("disabled", "false")
@@ -241,7 +241,7 @@ boxMessage.addEventListener("click", function (e) {
     const btn = e.target.closest(".btnRemoveMessage");
     if (!btn) return;
     const message_id = parseInt(btn.getAttribute('data-messageId'));
-    disabledDeleteMessage()
+    disableDeleteMessage()
     removeMessage(btn, message_id)
 })
 
@@ -254,7 +254,7 @@ function removeMessage(btn, message_id) {
         if (response.data) {
             if (response.data['success'] === true) {
                 console.log(response.data)
-                enabledDeleteMessage()
+                enableDeleteMessage()
             } else {
                 return null;
             }
