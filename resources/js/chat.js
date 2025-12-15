@@ -153,8 +153,7 @@ function addMessage(sender, message, messageId, user_id) {
     let card = document.createElement('div');
     card.className = 'card my-2';
     card.innerHTML = '';
-    let element =
-        `<div class="card-body" id="data-messageId-${messageId}" >
+    let element = `<div class="card-body" id="data-messageId-${messageId}" >
         <div class="d-flex justify-content-between">
         <div>
         <span class="card-subtitle text-muted">${sender}</span>
@@ -215,7 +214,8 @@ window.Echo.join(`chat.${roomId}`).listen('.message.delete', (e) => {
 
 function removeMessageElement(messageId) {
 
-    const msgElement = document.querySelector(`#${messageId}`);
+    const msgElement = document.getElementById(`data-messageId-${messageId}`);
+    msgElement.remove();
 }
 
 boxMessage.addEventListener("click", function (e) {
