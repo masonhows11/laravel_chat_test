@@ -55,7 +55,7 @@ class ChatController extends Controller
                 $messageId = $message->id;
 
                 if (auth()->id() == $message->user_id) {
-                    // Message::destroy($request->message_id);
+                    Message::destroy($request->message_id);
                     event(new MessageDeleteEvent($roomId, $messageId, auth()->user()));
                     return response()->json(['success' => true], 200);
                 } else {

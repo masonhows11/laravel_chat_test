@@ -126,7 +126,7 @@ function saveMessage(event) {
         room_id: parseInt(roomId),
         message: inputMessage.value
     }).then(function (response) {
-        console.log(response)
+        // console.log(response)
     }).catch(function (error) {
         console.log(error);
     })
@@ -213,7 +213,6 @@ window.Echo.join(`chat.${roomId}`).listen('.message.delete', (e) => {
 })
 
 function removeMessageElement(messageId) {
-
     const msgElement = document.getElementById(`data-messageId-${messageId}`);
     msgElement.remove();
 }
@@ -221,9 +220,11 @@ function removeMessageElement(messageId) {
 boxMessage.addEventListener("click", function (e) {
     const btn = e.target.closest(".btnRemoveMessage");
     if (!btn) return;
+    // console.log(btn.closest('.card'))
+    // console.log(btn)
     const message_id = parseInt(btn.getAttribute('data-messageId'));
     // console.log(message_id)
-    removeMessage(btn, message_id)
+    //removeMessage(btn, message_id)
 })
 
 function removeMessage(btn, message_id) {
@@ -234,8 +235,8 @@ function removeMessage(btn, message_id) {
     }).then(function (response) {
         if (response.data) {
             if (response.data['success'] === true) {
-                // btn.closest('.card').remove();
-                console.log('true')
+                btn.closest('.card').remove();
+                //console.log('true')
             } else {
                 return null;
             }
