@@ -220,9 +220,14 @@ function disableDeleteMessage() {
 ////
 function enableDeleteMessage() {
     let allBtn = document.querySelectorAll('.btnRemoveMessage');
-    allBtn.forEach(el => {
-        el.setAttribute("disabled", "false")
-    })
+    setTimeout(function (){
+        allBtn.forEach(el => {
+            el.removeAttribute("disabled")
+            el.style.opacity = 1;
+        })
+    },1000)
+
+
 }
 ////
 window.Echo.join(`chat.${roomId}`).listen('.message.delete', (e) => {
@@ -253,7 +258,6 @@ function removeMessage(btn, message_id) {
     }).then(function (response) {
         if (response.data) {
             if (response.data['success'] === true) {
-                console.log(response.data)
                 enableDeleteMessage()
             } else {
                 return null;
