@@ -154,7 +154,7 @@ function addMessage(sender, message, messageId, user_id) {
     card.className = 'card my-2';
     card.innerHTML = '';
     let element =
-        `<div class="card-body">
+        `<div class="card-body" id="data-messageId-${messageId}" >
         <div class="d-flex justify-content-between">
         <div>
         <span class="card-subtitle text-muted">${sender}</span>
@@ -176,16 +176,7 @@ function addMessage(sender, message, messageId, user_id) {
     scrollDownBox()
 }
 
-//// listen for message.delete event to
-//// delete message element for other users
-window.Echo.join(`chat.${roomId}`).listen('.message.delete', (e) => {
-    let messageId = e.message_id;
-    let user_id = e.user_id;
-    //removeMessageElement(messageId)
-})
 
-function removeMessageElement(messageId) {
-}
 
 function scrollDownBox() {
     boxMessage.scrollTo({
@@ -210,6 +201,21 @@ function messageAlert(message) {
         icon: "success",
         title: message
     });
+}
+
+
+//// listen for message.delete event to
+//// delete message element for other users
+window.Echo.join(`chat.${roomId}`).listen('.message.delete', (e) => {
+    let messageId = e.message_id;
+    let user_id = e.user_id;
+    console.log(messageId)
+    removeMessageElement(messageId)
+})
+
+function removeMessageElement(messageId) {
+
+    const msgElement = document.querySelector(`#${messageId}`);
 }
 
 boxMessage.addEventListener("click", function (e) {

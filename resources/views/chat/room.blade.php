@@ -16,7 +16,7 @@
                              style="height:480px">
                             @if(!empty($messages))
                                 @foreach($messages as $message)
-                                    <div class="card my-2">
+                                    <div class="card my-2" id="data-messageId-{{$message->id}}">
                                         <div class="card-body">
                                             <div class="d-flex justify-content-between">
                                                 <div>
