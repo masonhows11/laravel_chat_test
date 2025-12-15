@@ -10,11 +10,42 @@ window.Echo = new Echo({
     encrypted: true,
 });
 import axios from 'axios';
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+
+////
 document.addEventListener('DOMContentLoaded', () => {
     scrollDownBox();
 })
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+
+////
+function scrollDownBox() {
+    boxMessage.scrollTo({
+        top: boxMessage.scrollHeight,
+        behavior: "smooth",
+    })
+}
+
+////
+function messageAlert(message) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+    Toast.fire({
+        icon: "success",
+        title: message
+    });
+}
+
 
 
 //// private channel
@@ -181,30 +212,7 @@ function addMessage(sender, message, messageId, user_id) {
 }
 
 
-function scrollDownBox() {
-    boxMessage.scrollTo({
-        top: boxMessage.scrollHeight,
-        behavior: "smooth",
-    })
-}
 
-function messageAlert(message) {
-    const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-        }
-    });
-    Toast.fire({
-        icon: "success",
-        title: message
-    });
-}
 
 
 
