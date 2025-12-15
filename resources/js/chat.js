@@ -179,11 +179,8 @@ function addMessage(sender, message, messageId, user_id) {
 //// listen for message.delete event to
 //// delete message element for other users
 window.Echo.join(`chat.${roomId}`).listen('.message.delete', (e) => {
-    console.log(e)
     let messageId = e.message_id;
     let user_id = e.user_id;
-    console.log(messageId)
-    console.log(user_id)
     //removeMessageElement(messageId)
 })
 
@@ -219,7 +216,7 @@ boxMessage.addEventListener("click", function (e) {
     const btn = e.target.closest(".btnRemoveMessage");
     if (!btn) return;
     const message_id = parseInt(btn.getAttribute('data-messageId'));
-    console.log(message_id)
+    // console.log(message_id)
     removeMessage(btn, message_id)
 })
 

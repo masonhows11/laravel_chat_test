@@ -33,8 +33,7 @@ class MessageDeleteEvent implements ShouldBroadcast
     public function broadcastWith(): array
     {
         return ['message_id' => $this->message_id,
-                'user_id' => $this->user->id,
-                'room_id' => $this->roomId,];
+                'user_id' => $this->user->id];
     }
     public function broadcastAs(): string
     {
