@@ -49,7 +49,6 @@ class ChatController extends Controller
 
         try {
             $message = Message::find($request->message_id);
-
             if (!empty($message)) {
 
                 $roomId = $message->room_id;
@@ -60,10 +59,10 @@ class ChatController extends Controller
                     event(new MessageDeleteEvent($roomId, $messageId, auth()->user()));
                     return response()->json(['success' => true], 200);
                 } else {
-                    return response()->json(['success' => false,'status' => 403], 200);
+                    return response()->json(['success' => false], 403);
                 }
             } else {
-                return response()->json(['success' => false], 200);
+                return response()->json(['success' => false], 404);
             }
 
 

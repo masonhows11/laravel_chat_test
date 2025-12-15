@@ -55,7 +55,7 @@ class MessageSentEvent implements ShouldBroadcast
             // new PrivateChannel('channel-name'),
 
             // new PrivateChannel('chat.' . $this->user->id),
-            new PresenceChannel('chat.' . $this->roomId),
+            new PresenceChannel('chat.'.$this->roomId),
         ];
     }
 }

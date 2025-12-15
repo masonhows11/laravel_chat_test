@@ -33,7 +33,8 @@ class MessageDeleteEvent implements ShouldBroadcast
     public function broadcastWith(): array
     {
         return ['message_id' => $this->message_id,
-               'user_id' => $this->user->id,];
+                'user_id' => $this->user->id,
+                'room_id' => $this->roomId,];
     }
     public function broadcastAs(): string
     {
@@ -50,7 +51,7 @@ class MessageDeleteEvent implements ShouldBroadcast
         return [
 
             // new PrivateChannel('channel-name'),
-            new PresenceChannel('chat.',$this->roomId)
+            new PresenceChannel('chat.'.$this->roomId)
         ];
     }
 }

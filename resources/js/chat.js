@@ -179,9 +179,12 @@ function addMessage(sender, message, messageId, user_id) {
 //// listen for message.delete event to
 //// delete message element for other users
 window.Echo.join(`chat.${roomId}`).listen('.message.delete', (e) => {
-    let messageId = e.id;
+    console.log(e)
+    let messageId = e.message_id;
+    let user_id = e.user_id;
     console.log(messageId)
-    removeMessageElement(messageId)
+    console.log(user_id)
+    //removeMessageElement(messageId)
 })
 
 function removeMessageElement(messageId) {
